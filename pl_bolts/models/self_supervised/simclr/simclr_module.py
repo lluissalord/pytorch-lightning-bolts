@@ -131,7 +131,7 @@ class SimCLR(pl.LightningModule):
         nb_gpus = len(self.gpus) if isinstance(gpus, (list, tuple)) else self.gpus
         assert isinstance(nb_gpus, int)
         global_batch_size = self.num_nodes * nb_gpus * self.batch_size if nb_gpus > 0 else self.batch_size
-        self.train_iters_per_epoch = math.ceil(self.num_samples // global_batch_size)
+        self.train_iters_per_epoch = math.ceil(self.num_samples / global_batch_size)
 
         # define LR schedule
         warmup_lr_schedule = np.linspace(
